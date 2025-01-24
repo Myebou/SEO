@@ -1,0 +1,13 @@
+# Bloquear descarga directa de imágenes
+<FilesMatch "\.(jpg|jpeg|png|gif|bmp|svg|webp)$">
+    Order Deny,Allow
+    Deny from all
+    Allow from yourdomain.com
+</FilesMatch>
+
+# Evitar acceso a archivos específicos desde otros dominios
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?yourdomain\.com/ [NC]
+    RewriteRule \.(jpg|jpeg|png|gif|bmp|svg|webp)$ - [F,L]
+</IfModule>
