@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Bloquear acceso directo a imágenes desde otros sitios
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?yourdomain\.com/ [NC]
+
+    # Permitir acceso a los principales motores de búsqueda
+    RewriteCond %{HTTP_USER_AGENT} !Googlebot [NC]
+    RewriteCond %{HTTP_USER_AGENT} !Bingbot [NC]
+    RewriteCond %{HTTP_USER_AGENT} !Slurp [NC] # Yahoo
+    RewriteCond %{HTTP_USER_AGENT} !DuckDuckBot [NC]
+    RewriteCond %{HTTP_USER_AGENT} !Baiduspider [NC]
+    RewriteCond %{HTTP_USER_AGENT} !YandexBot [NC]
+    RewriteCond %{HTTP_USER_AGENT} !facebot [NC] # Facebook Crawler
+    RewriteCond %{HTTP_USER_AGENT} !ia_archiver [NC] # Alexa
+    RewriteCond %{HTTP_USER_AGENT} !Applebot [NC]
+    RewriteCond %{HTTP_USER_AGENT} !SemrushBot [NC] # SEMrush
+    RewriteCond %{HTTP_USER_AGENT} !MJ12bot [NC] # Majestic
+    RewriteCond %{HTTP_USER_AGENT} !AhrefsBot [NC]
+    RewriteCond %{HTTP_USER_AGENT} !Ask Jeeves [NC] # Ask.com
+
+    # Bloquear acceso directo a imágenes
+    RewriteRule \.(jpg|jpeg|png|gif|bmp|svg|webp)$ - [F,L]
+</IfModule>
